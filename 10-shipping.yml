@@ -24,6 +24,11 @@ spec:
         command: ['sh', '-c', 'echo The app is running! && sleep 3600']
         ports:
         - containerPort: 50051
+      resources:
+          limits:
+            cpu: 200m
+          requests:
+            cpu: 100m
 ---
 apiVersion: v1
 kind: Service
