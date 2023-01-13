@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: frontend
+  #namespace: frontend
   name: shipping-dep
 spec:
   replicas: 1
