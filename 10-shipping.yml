@@ -24,7 +24,7 @@ spec:
         command: ['sh', '-c', 'echo The app is running! && sleep 3600']
         ports:
         - containerPort: 50051
-      resources:
+        resources:
           limits:
             cpu: 200m
           requests:
