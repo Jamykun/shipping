@@ -3,11 +3,7 @@ steps:
   # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   id: build
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/pfr/shipping:latest_$SHORT_SHA', '.']
-# Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  id: Push
-  args: ['push', 'gcr.io/$PROJECT_ID/pfr/shipping:latest_$SHORT_SHA']
+  args: ['build', '-t', 'gcr.io/formationgcp-baptiste/pfr/shipping:latest', '.']
 #Deploy de notre image
 - name: 'gcr.io/cloud-builders/kubectl'
   id: Deploy
@@ -16,3 +12,21 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
   - 'CLOUDSDK_COMPUTE_REGION=northamerica-northeast1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-pfr-main'
+#step 3
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Update-manifest
+  args: [
+   'set', 
+   'image', 
+   'deployment', 
+   'shipping-dep', 
+   'shipping-con=gcr.io/formationgcp-baptiste/pfr/shipping:latest'
+  ]
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
+  - 'CLOUDSDK_COMPUTE_REGION=northamerica-northeast1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-pfr-main'
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args: ['push', 'gcr.io/formationgcp-baptiste/pfr/shipping:latest']
