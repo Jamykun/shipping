@@ -21,7 +21,7 @@ spec:
       containers:
       - name: shipping-con
         image: golang:1.15-alpine
-        command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+        #command: ['sh', '-c', 'echo The app is running! && sleep 3600']
         ports:
         - containerPort: 50051
         resources:
